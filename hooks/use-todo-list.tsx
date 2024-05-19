@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { isEmpty } from 'lodash';
+import toast from "react-hot-toast";
 
 
 export const useTodoList = (item: TodoItemInterface, setShowInput?: (value: boolean) => void) => {
@@ -24,7 +25,7 @@ export const useTodoList = (item: TodoItemInterface, setShowInput?: (value: bool
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: item.title,
-            description: item.description,
+            description: item.description || undefined,
             completed: item.completed === 1 ? true : false
         },
 
@@ -36,8 +37,11 @@ export const useTodoList = (item: TodoItemInterface, setShowInput?: (value: bool
     }, [item.open]);
 
 
-    const onSubmit = (values: formSchemaType) => {
+    const onSubmit = async (values: formSchemaType) => {
         try {
+            console.log('submit')
+            await form.trigger(['title', 'description', 'completed'])
+            console.log(form.formState.errors)
             if (values.description === '') delete values.description
 
             const formData = new FormData();
@@ -101,13 +105,17 @@ export const useTodoList = (item: TodoItemInterface, setShowInput?: (value: bool
         const currentTarget = e.currentTarget;
         setTimeout(async () => {
             if (!currentTarget.contains(document.activeElement)) {
-                console.log('here')
                 setOpen(false)
                 setFocus(false)
-                const isFormEdited = form.getFieldState('title').isDirty ?? form.getFieldState('description').isDirty ?? form.getFieldState('completed').isDirty
+                await form.trigger()
+                for (let key in form.formState.errors) {
+                    toast.error(form.formState.errors[key as keyof formSchemaType]?.message!)
+                }
+                const isFormEdited = form.getFieldState('title').isDirty || form.getFieldState('description').isDirty || form.getFieldState('completed').isDirty
                 if (isEmpty(form.formState.errors) && (isFormEdited || files.length > 0)) {
                     form.handleSubmit(onSubmit)()
                 }
+
             }
         }, 0);
     };

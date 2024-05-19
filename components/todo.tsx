@@ -10,15 +10,17 @@ import * as z from 'zod';
 export interface TodoItemInterface {
     id: number | undefined;
     title: string;
-    description?: string;
+    description?: string | undefined;
     completed: boolean | number;
     attachments?: Record<string, any>[];
     focused?: boolean;
     open?: boolean;
 }
 
+const notEmpty = z.string().trim().min(1, { message: "Please provide a title" });
+
 export const formSchema = z.object({
-    title: z.string(),
+    title: z.string().pipe(notEmpty),
     description: z.string().optional(),
     completed: z.boolean(),
 

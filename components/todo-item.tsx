@@ -21,7 +21,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, setShowInput }) => {
         focusItem,
         openItem,
         removeItem,
-        onFileChange
+        onFileChange,
     } = useTodoList(item, setShowInput)
 
     return <form
@@ -52,7 +52,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, setShowInput }) => {
             <div className="w-full" style={{ display: open ? 'block' : 'none' }}>
                 <textarea
                     className="text-md w-full bg-transparent text-gray-300 leading-tight focus:outline-none"
-                    {...(form.register('description'))}
+                    {...form.register('description')}
                     placeholder="Notes"
                 />
             </div>
@@ -75,6 +75,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, setShowInput }) => {
 
                     <input
                         type="file" onChange={onFileChange}
+                        accept="application/pdf"
                         className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" multiple />
                 </div>
                 {
