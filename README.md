@@ -1,8 +1,25 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Features
+
+Crud operation for todo list
+
 ## Getting Started
 
+## Installation
+
 First, run the development server:
+
+```bash
+# Clone the repository
+git clone https://github.com/muuhab//todo-list-fe
+
+# Navigate to the project directory
+cd auth-system
+
+# Install dependencies
+npm install
+```
 
 ```bash
 npm run dev
@@ -13,6 +30,8 @@ pnpm dev
 # or
 bun dev
 ```
+
+Second, change BaseUrl from config/datasource.jsx
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
