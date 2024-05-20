@@ -39,9 +39,7 @@ export const useTodoItem = (item: TodoItemInterface, setShowInput?: (value: bool
 
     const onSubmit = async (values: formSchemaType) => {
         try {
-            console.log('submit')
             await form.trigger(['title', 'description', 'completed'])
-            console.log(form.formState.errors)
             if (values.description === '') delete values.description
 
             const formData = new FormData();
