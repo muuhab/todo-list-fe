@@ -15,7 +15,7 @@ First, run the development server:
 git clone https://github.com/muuhab/todo-list-fe
 
 # Navigate to the project directory
-cd auth-system
+cd todo-list-fe
 
 # Install dependencies
 npm install
