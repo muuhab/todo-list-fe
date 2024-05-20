@@ -12,7 +12,7 @@ First, run the development server:
 
 ```bash
 # Clone the repository
-git clone https://github.com/muuhab//todo-list-fe
+git clone https://github.com/muuhab/todo-list-fe
 
 # Navigate to the project directory
 cd auth-system
