@@ -1,10 +1,10 @@
 "use client";
 
 import { BASE_URL } from '@/config/datasource';
-import { useTodoList } from '@/hooks/use-todo-list';
 import Image from 'next/image';
 import { FC } from 'react';
 import { TodoItemInterface as TodoType } from './todo';
+import { useTodoItem } from '@/hooks/use-todo-item';
 
 interface TodoItemProps {
     item: TodoType;
@@ -22,7 +22,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, setShowInput }) => {
         openItem,
         removeItem,
         onFileChange,
-    } = useTodoList(item, setShowInput)
+    } = useTodoItem(item, setShowInput)
 
     return <form
         tabIndex={0}
@@ -83,6 +83,7 @@ const TodoItem: FC<TodoItemProps> = ({ item, setShowInput }) => {
 
                     <div className=" flex justify-end" style={{ display: open ? 'flex' : 'none' }}>
                         <button className="p-1 mr-4 focus:outline-none hover:text-red-300"
+                            type='button'
                             onClick={removeItem}
                         >
                             <Image src="/icons/trash-bin-2-svgrepo-com.svg" width={20} height={20} alt="Add" />

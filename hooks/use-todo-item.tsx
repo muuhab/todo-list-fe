@@ -7,7 +7,7 @@ import { isEmpty } from 'lodash';
 import toast from "react-hot-toast";
 
 
-export const useTodoList = (item: TodoItemInterface, setShowInput?: (value: boolean) => void) => {
+export const useTodoItem = (item: TodoItemInterface, setShowInput?: (value: boolean) => void) => {
     const [focus, setFocus] = useState(false)
     const [open, setOpen] = useState(false)
 
